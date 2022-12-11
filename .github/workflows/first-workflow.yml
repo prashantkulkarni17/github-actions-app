@@ -1,0 +1,11 @@
+name: first-workflow
+# Controls when the workflow will run
+on: workflow_dispatch
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: First Step - Print Hello Prashant
+        run: echo "Hello, Prashant!"
+      - name: First Step - Print Bye Prashant
+        run: echo "Bye Bye, Prashant!"
