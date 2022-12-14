@@ -1,4 +1,4 @@
-name: Deploy Project
+name: Upload / Download Artifacts
 on:
   push:
     branches:
@@ -17,7 +17,7 @@ jobs:
         run: npm ci
       - name: Run Tests
         run: npm test
-  Deploy:
+  Build:
     needs: Test
     runs-on: ubuntu-latest
     steps:
@@ -38,5 +38,15 @@ jobs:
           path: |
             dist
             package.json
+  Deploy:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Build Artifacts
+        uses: actions/download-artifact@v3
+        with: 
+          name: dist-files
+      - name: Output the downloaded files
+        run: ls
       - name: Deploy 
         run: echo "Deploying..."
